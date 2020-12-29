@@ -82,6 +82,12 @@ namespace API.Controllers
         public async Task<IActionResult> Patch(int id, [FromBody] JsonPatchDocument<ExampleViewModel> patchDoc)
         {
             var model = await repository.GetByIdAsync(id);
+
+            if (model is null)
+            {
+                return NotFound();
+            }
+
             var viewModel = new ExampleViewModel(model);
 
             patchDoc.ApplyTo(viewModel);
