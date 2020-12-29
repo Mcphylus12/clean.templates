@@ -10,11 +10,5 @@ namespace API.Tests
         {
             Assert.True(true);
         }
-
-        [Fact]
-        public void FailingTest()
-        {
-            Assert.True(false);
-        }
     }
 }
