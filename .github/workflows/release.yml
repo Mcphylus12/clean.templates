@@ -22,6 +22,10 @@ jobs:
         env:
           TAG_REF: ${{ github.ref }}
         run: dotnet pack -c Release -p:PackageVersion=${TAG_REF#*v}
+      - name: rename package
+        env:
+          TAG_REF: ${{ github.ref }}
+        run: mv ./bin/Release/cleanstart.Templates.${TAG_REF#*v}.nupkg ./package.nupkg
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,9 +41,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_REF: ${{ github.ref }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./bin/Release/cleanstart.Templates.${TAG_REF#*v}.nupkg
+          asset_path: ./package.nupkg
           asset_name: package.nupkg
           asset_content_type: application/zip
