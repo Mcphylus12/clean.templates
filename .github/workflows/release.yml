@@ -21,7 +21,7 @@ jobs:
       - name: Pack Nuget package
         env:
           TAG_REF: ${{ github.ref }}
-        run: dotnet pack -c Release -p:PackageVersion=${TAG_REF:1}
+        run: dotnet pack -c Release -p:PackageVersion=${TAG_REF#*v}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -39,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_REF: ${{ github.ref }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./bin/Release/cleanstart.Templates.${TAG_REF:1}.nupkg
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bin/Release/cleanstart.Templates.${TAG_REF#*v}.nupkg
           asset_name: package.nupkg
           asset_content_type: application/zip
