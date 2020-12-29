@@ -24,4 +24,4 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --verbosity normal
