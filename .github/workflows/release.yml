@@ -39,3 +39,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./bin/Release/cleanstart.Templates.1.0.0.nupkg
           asset_name: package.nupkg
+          asset_content_type: application/zip
