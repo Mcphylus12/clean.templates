@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Kyle Alexander",
+    "classifications": [ "ASP.NET Core", "Code" ],
+    "identity": "cleanstart.Templates.aspnetcore",
+    "name": "Clean code template for aspnet core",
+    "shortName": "clean_aspnetcore",
+    "tags": {
+      "language": "C#"
+    },
+    "guids": [
+        "{0D948298-9CB6-4D5B-80BA-87B761F8F0E3}",
+        "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}",
+        "{78BDE420-715C-406D-ABD7-4F5705A2E440}",
+        "{48EB1EA6-C89F-4E10-BA21-B8CA88B0AB12}",
+        "{728E0BCF-77FA-4937-AF01-0141E501B8BE}",
+        "{6B7EF214-B3AB-4BCE-AB69-6A95C8474EC7}",
+        "{36115938-F336-4893-B564-067045F4BF19}",
+        "{3D9464F6-D105-448A-B8DC-3986F5E99579}"
+    ],
+    "exclude": 
+    [ 
+        "**/[Bb]in/**", 
+        "**/[Oo]bj/**", 
+        ".template.config/**/*", 
+        "**/*.filelist", 
+        "**/*.user", 
+        "**/*.lock.json",
+        "**/node_modules/**",
+        ".vs/**/*"
+    ],
+    "sourceName": "aspnetcore",
+    "preferNameDirectory": true
+  }
