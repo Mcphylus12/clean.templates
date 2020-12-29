@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0</PackageVersion>
+    <PackageVersion>0.0.1</PackageVersion>
     <PackageId>cleanstart.Templates</PackageId>
     <Title>Clean Start</Title>
     <Authors>Kyle Alexander</Authors>
