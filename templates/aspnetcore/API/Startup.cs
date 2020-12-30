@@ -1,15 +1,11 @@
-using API.Validators;
-using API.ViewModels;
 using Business;
 using DB;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using MediatR;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,18 +34,11 @@ namespace API
                 .AddNewtonsoftJson()
                 .AddFluentValidation();
 
-            // TODO move these registration to autofac modules or servicecollection extensions
-            services.AddDbContext<ExampleContext>(options =>
-            {
-                options.UseSqlite("Data Source=example.db"); // TODO Change to sql database
-            });
-
-            services.AddTransient<IValidator<ExampleViewModel>, ExampleValidator>();
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddMediatR(typeof(ExampleBusinessFunction).Assembly);
+            services.AddWebServices();
+            services.AddBusinessServices();
+            services.AddDataServices();
 
             services.AddSwaggerGen();
-
             services.AddOData();
 
             AddOdataFormatters(services);
