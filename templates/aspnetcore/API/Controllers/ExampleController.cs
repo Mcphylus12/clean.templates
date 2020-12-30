@@ -14,12 +14,12 @@ namespace API.Controllers
     public class ExampleController : ControllerBase
     {
         private readonly IRepository<ExampleBusinessModel> repository;
-        private readonly IMediator mediator;
+        private readonly ISender sender;
 
-        public ExampleController(IRepository<ExampleBusinessModel> repository, IMediator mediator)
+        public ExampleController(IRepository<ExampleBusinessModel> repository, ISender sender)
         {
             this.repository = repository;
-            this.mediator = mediator;
+            this.sender = sender;
         }
 
         /*
@@ -101,7 +101,7 @@ namespace API.Controllers
         [Route("{id}/example-business-function")]
         public async Task<IActionResult> ExampleBusinessFunction(int id, [FromBody] ExampleBusinessFunctionParameters parameters)
         {
-            var result = await mediator.Send(parameters.ToRequest(id));
+            var result = await sender.Send(parameters.ToRequest(id));
 
             if (!result.Success)
             {

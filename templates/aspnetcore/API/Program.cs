@@ -12,7 +12,7 @@ namespace API
             // This allows serilog to effectively log any issues that occur as part of the start of the app
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
+                .WriteTo.Console(/*new RenderedCompactJsonFormatter()*/) // for detailed json output
                 .CreateLogger();
 
             try

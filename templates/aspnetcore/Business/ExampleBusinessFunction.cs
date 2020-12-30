@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Business.Logging;
+using MediatR;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,17 +9,28 @@ namespace Business
     public class ExampleBusinessFunction : IRequestHandler<ExampleParam, ExampleResult>
     {
         private readonly IRepository<ExampleBusinessModel> repository;
+        private readonly IPublisher publisher;
+        private readonly ILogger<ExampleBusinessFunction> logger;
 
-        public ExampleBusinessFunction(IRepository<ExampleBusinessModel> repository)
+        public ExampleBusinessFunction(IRepository<ExampleBusinessModel> repository, IPublisher publisher, ILogger<ExampleBusinessFunction> logger)
         {
             this.repository = repository;
+            this.publisher = publisher;
+            this.logger = logger;
         }
 
         public async Task<ExampleResult> Handle(ExampleParam request, CancellationToken cancellationToken)
         {
-            var model = await repository.GetByIdAsync(request.Id);
+            using (logger.TimeOperation("Adding age for id {id}", request.Id))
+            {
+                var model = await repository.GetByIdAsync(request.Id);
 
-            model.Age += request.AgeToAdd;
+                model.Age += request.AgeToAdd;
+
+                await repository.SaveChangesAsync();
+            }
+
+            await publisher.Publish(new AgeAddedNotification(request.Id));
 
             return new ExampleResult(true);
         }
