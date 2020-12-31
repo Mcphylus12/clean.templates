@@ -21,6 +21,11 @@ namespace API.ViewModels
              */
         }
 
+        public ExampleViewModel()
+        {
+
+        }
+
         internal ExampleBusinessModel ToBusiness()
         {
             return this.Adapt<ExampleBusinessModel>();

@@ -26,6 +26,9 @@ namespace Business
                 var model = await repository.GetByIdAsync(request.Id);
 
                 model.Age += request.AgeToAdd;
+                
+                // All logs made inside a timeoperation have an operationid automatically attached for correlation purposes
+                logger.LogInformation("Age added {age}", request.AgeToAdd); 
 
                 await repository.SaveChangesAsync();
             }
